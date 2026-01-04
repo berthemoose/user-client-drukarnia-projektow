@@ -1,0 +1,60 @@
+<template>
+  <!-- Pages -->
+  <div class="">
+    <div class="mb-1">
+      <p class="font-semibold text-gray-900 dark:text-gray-100">Ilość stron</p>
+    </div>
+
+    <!-- Number of pages -->
+    <ProductPageFormTextInputsDynamicInput :label="''" :desc="''" :placeholder="'Liczba stron'" :field="pages"
+      :field-attrs="pagesAttrs" :are-inputs-disabled="areInputsDisabledRef" :input-type="'number'" />
+  </div>
+
+  <!-- Copies -->
+  <div class="">
+    <div class="mb-1">
+      <p class="font-semibold text-gray-900 dark:text-gray-100">Nakład</p>
+    </div>
+
+    <!-- Number of copies -->
+    <ProductPageFormTextInputsDynamicInput :label="''" :desc="''" :placeholder="'Liczba Kopii'" :field="copies"
+      :field-attrs="copiesAttrs" :are-inputs-disabled="areInputsDisabledRef" :input-type="'number'" />
+  </div>
+
+  <!-- Comments -->
+  <div class="mt-6">
+    <p class="font-semibold text-gray-900 dark:text-gray-100">Komentarze</p>
+    <ProductPageFormTextInputsDynamicInput :label="''" :desc="''" :placeholder="'Komentarze'" :field="comments"
+      :field-attrs="commentsAttrs" :are-inputs-disabled="areInputsDisabledRef" :input-type="'textarea'" />
+  </div>
+
+
+</template>
+
+<script lang="ts" setup>
+import type { StaticFieldKey } from "../formFields";
+import type { DefineFieldReturn } from "../index.vue";
+
+interface InputProps {
+  areInputsDisabled: boolean;
+  fields: Record<StaticFieldKey, DefineFieldReturn>;
+  errors: Partial<Record<string, string | undefined>>;
+}
+const props = defineProps<InputProps>();
+
+/* Pages */
+const pages = computed(() => props.fields.pages[0]);
+const pagesAttrs = computed(() => props.fields.pages[1]);
+/* Copies */
+const copies = computed(() => props.fields.copies[0]);
+const copiesAttrs = computed(() => props.fields.copies[1]);
+/* Comments */
+const comments = computed(() => props.fields.comments[0]);
+const commentsAttrs = computed(() => props.fields.comments[1]);
+
+/* Reactive prop vals */
+const { areInputsDisabled: areInputsDisabledRef } = toRefs(props);
+
+/* Reactive field model */
+const { errors: err, fields } = toRefs(props);
+</script>

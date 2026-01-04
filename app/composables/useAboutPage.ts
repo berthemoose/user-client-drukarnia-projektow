@@ -1,0 +1,112 @@
+import { ref, computed } from 'vue';
+
+export interface TimelineItem {
+  year: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  alignRight?: boolean;
+  image?: {
+    url: string;
+    alt?: string;
+  };
+}
+
+export interface CtaButton {
+  label: string;
+  url: string;
+}
+
+export interface CtaSection {
+  header?: string;
+  paragraph?: string;
+  content?: string;
+  primaryButton?: {
+    label: string;
+    url: string;
+  };
+  secondaryButton?: {
+    label: string;
+    url: string;
+  };
+  phoneNumber?: string;
+}
+
+export interface TopSection {
+  header?: string;
+  paragraph?: string;
+  subHeader?: string;
+  subParagraph?: string;
+  mainImage?: {
+    url: string;
+    alt?: string;
+  };
+}
+
+export interface AboutPageData {
+  topSection?: TopSection;
+  timelineSection?: {
+    items: TimelineItem[];
+  };
+  ctaSection?: CtaSection;
+}
+
+export const useAboutPage = () => {
+  const { cmsUrl } = useApi();
+  const nuxtApp = useNuxtApp();
+
+  // Use useFetch directly with caching and lazy loading
+  const { data, pending, error, refresh } = useFetch<AboutPageData>(
+    `${cmsUrl}/globals/aboutPage?depth=1`,
+    {
+      key: 'about-page-data', // Unique cache key
+      lazy: true, // Don't block navigation
+      server: true, // Enable SSR
+      // Cache data for 5 minutes (300000ms)
+      getCachedData(key) {
+        const data = nuxtApp.payload.data[key] || nuxtApp.static.data[key];
+        // Return cached data if it exists and is less than 5 minutes old
+        if (data && Date.now() - (data as any)._fetchedAt < 300000) {
+          return data;
+        }
+      },
+      // Add timestamp for cache validation
+      transform: (data) => {
+        return {
+          ...data,
+          _fetchedAt: Date.now(),
+        };
+      },
+    }
+  );
+
+  // Transform timeline items to match the TimelineComponent's expected format
+  const transformedTimelineItems = computed(() => {
+    if (!data.value?.timelineSection?.items) return [];
+    return data.value.timelineSection.items.map((item, index) => {
+      // Create a new object with only the properties we want to keep
+      const { image, ...rest } = item;
+      return {
+        ...rest,
+        imageUrl: image?.url || '',
+        alignRight: index % 2 === 0
+      };
+    });
+  });
+
+  // Expose computed properties for easier access
+  const ctaSection = computed(() => data.value?.ctaSection);
+  const topSection = computed(() => data.value?.topSection);
+  const timelineSection = computed(() => data.value?.timelineSection);
+
+  return {
+    data,
+    pending,
+    error,
+    transformedTimelineItems,
+    ctaSection,
+    topSection,
+    timelineSection,
+    refresh
+  };
+};
