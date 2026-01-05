@@ -1,6 +1,7 @@
 <template>
   <main>
     <div>
+      
       <LandingHero :data="landingHeroData" />
       <LandingServices :data="landingServicesData" />
       <LandingTrusted v-bind="landingTrustedData" />

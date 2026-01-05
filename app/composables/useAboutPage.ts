@@ -53,23 +53,33 @@ export interface AboutPageData {
 
 export const useAboutPage = () => {
   const { cmsUrl } = useApi();
-  const nuxtApp = useNuxtApp();
 
-  // Use useFetch directly
-  const { data, pending, error, refresh } = useFetch<AboutPageData>(
+  // State for persistent data across navigations
+  const aboutPageData = useState<AboutPageData | null>('about-page-persistent-state', () => null);
+
+  const { data: fetchedData, pending, error, refresh } = useFetch<AboutPageData>(
     `${cmsUrl}/globals/aboutPage?depth=1`,
     {
-      key: 'about-page-data', // Unique cache key
-      server: true, // Enable SSR
+      key: 'about-page-data',
+      server: true, // Crucial for SSR
     }
   );
 
+  // Sync fetched data to persistent state
+  if (fetchedData.value) {
+    aboutPageData.value = fetchedData.value;
+  }
 
-  // Transform timeline items to match the TimelineComponent's expected format
+  watch(fetchedData, (newVal) => {
+    if (newVal) {
+      aboutPageData.value = newVal;
+    }
+  });
+
+  // Transform timeline items using the persistent state
   const transformedTimelineItems = computed(() => {
-    if (!data.value?.timelineSection?.items) return [];
-    return data.value.timelineSection.items.map((item, index) => {
-      // Create a new object with only the properties we want to keep
+    if (!aboutPageData.value?.timelineSection?.items) return [];
+    return aboutPageData.value.timelineSection.items.map((item, index) => {
       const { image, ...rest } = item;
       return {
         ...rest,
@@ -79,13 +89,13 @@ export const useAboutPage = () => {
     });
   });
 
-  // Expose computed properties for easier access
-  const ctaSection = computed(() => data.value?.ctaSection);
-  const topSection = computed(() => data.value?.topSection);
-  const timelineSection = computed(() => data.value?.timelineSection);
+  // Expose computed properties from the persistent state
+  const ctaSection = computed(() => aboutPageData.value?.ctaSection);
+  const topSection = computed(() => aboutPageData.value?.topSection);
+  const timelineSection = computed(() => aboutPageData.value?.timelineSection);
 
   return {
-    data,
+    data: aboutPageData, // Expose persistent data as 'data'
     pending,
     error,
     transformedTimelineItems,
