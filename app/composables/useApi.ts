@@ -1,4 +1,3 @@
-import type { RuntimeConfig } from '~/app/types/api';
 
 interface UseApiReturn {
   cmsUrl: string;
@@ -6,17 +5,14 @@ interface UseApiReturn {
 }
 
 export const useApi = (): UseApiReturn => {
-  const config = useRuntimeConfig() as RuntimeConfig;
+
   
-  if (!config.public.cmsUrl) {
-    throw new Error('API configuration is missing. Please check your environment variables.');
-  }
   
   /* CMS URL */
-  const cmsUrl = `${config.public.cmsUrl}/api`;
+  const cmsUrl = `https://app-cms-drukarnia-projektow-staging.azurewebsites.net`;
 
   /* Order service URL */
-  const orderUrl = `${config.public.orderUrl}`;
+  const orderUrl = `https://app-order-drukarnia-projektow-staging.azurewebsites.net`;
 
   return {
     cmsUrl,
