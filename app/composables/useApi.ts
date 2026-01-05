@@ -9,10 +9,13 @@ export const useApi = (): UseApiReturn => {
   
   
   /* CMS URL */
-  const cmsUrl = `https://app-cms-drukarnia-projektow-staging.azurewebsites.net`;
+  const cmsUrl = `https://app-cms-drukarnia-projektow-staging.azurewebsites.net/api`;
 
   /* Order service URL */
   const orderUrl = `https://app-order-drukarnia-projektow-staging.azurewebsites.net`;
+
+  
+  
 
   return {
     cmsUrl,
