@@ -3,13 +3,14 @@
     <div class="container mx-auto px-6 lg:px-8">
       <!-- Main Thesis Card -->
       <div class="relative overflow-hidden rounded-3xl shadow-2xl" style="
-          background: linear-gradient(
-            135deg,
-            #6b1f3a 0%,
-            #8b2f4a 50%,
-            #6b1f3a 100%
-          );
+          background: linear-gradient(135deg, #152845 0%, #2f4d7a 50%, #152845 100%);
         ">
+
+        <div
+          class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:40px_40px] pointer-events-none"
+          style="mask-image: radial-gradient(circle at center, black 40%, transparent 90%);">
+        </div>
+
         <!-- Decorative elements -->
         <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-32 -mt-32"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-black opacity-5 rounded-full -ml-48 -mb-48"></div>
@@ -79,18 +80,18 @@
             <div class="relative">
               <!-- Main Book/Thesis Visual -->
               <div
-                class="relative w-64 h-80 md:w-72 md:h-96 bg-gradient-to-br from-burgundy-800 to-burgundy-900 rounded-lg shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500"
+                class="relative w-64 h-80 md:w-72 md:h-96 rounded-lg shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform rotate-3 hover:rotate-0 transition-all duration-500 border border-white/10"
                 style="
-                  background: linear-gradient(145deg, #7b2f4a 0%, #5b1f3a 100%);
+                  background: linear-gradient(145deg, #1e3a8a 0%, #0f172a 100%);
                 ">
                 <!-- Book spine effect -->
-                <div class="absolute left-0 top-0 bottom-0 w-8 bg-black/20"></div>
+                <div class="absolute left-0 top-0 bottom-0 w-8 bg-black/40 border-r border-white/5"></div>
 
                 <!-- Gold text on cover -->
                 <div class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
                   <div class="space-y-6">
-                    <div class="text-amber-300 font-serif">
-                      <div class="text-xs md:text-sm tracking-widest uppercase mb-2">
+                    <div class="text-amber-400 font-serif">
+                      <div class="text-xs md:text-sm tracking-[0.3em] uppercase mb-2 opacity-80">
                         Praca
                       </div>
                       <div class="text-2xl md:text-3xl font-bold tracking-wider uppercase">
@@ -98,18 +99,18 @@
                       </div>
                     </div>
 
-                    <div class="w-16 h-0.5 bg-amber-300 mx-auto"></div>
+                    <div class="w-16 h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto"></div>
 
-                    <div class="text-white/60 text-xs md:text-sm space-y-1">
-                      <div>{{ currentUniversity }}</div>
+                    <div class="text-white/70 text-xs font-light tracking-wide space-y-1">
+                      <div class="italic">{{ currentUniversity }}</div>
                       <div>{{ year.currentYear }}</div>
                     </div>
                   </div>
                 </div>
 
                 <!-- Corner decoration -->
-                <div class="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-amber-300/50"></div>
-                <div class="absolute bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-amber-300/50"></div>
+                <div class="absolute top-5 right-5 w-10 h-10 border-t border-r border-amber-400/30"></div>
+                <div class="absolute bottom-5 left-10 w-10 h-10 border-b border-l border-amber-400/30"></div>
               </div>
 
               <!-- Floating badge -->
@@ -193,20 +194,3 @@ onUnmounted(() => {
   }
 });
 </script>
-
-<style scoped>
-/* Custom burgundy color for text utilities */
-@media (min-width: 768px) {
-  .text-burgundy-900 {
-    color: #4a1527;
-  }
-
-  .from-burgundy-800 {
-    --tw-gradient-from: #6b1f3a;
-  }
-
-  .to-burgundy-900 {
-    --tw-gradient-to: #4a1527;
-  }
-}
-</style>

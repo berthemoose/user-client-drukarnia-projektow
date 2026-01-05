@@ -1,7 +1,6 @@
 <template>
   <main>
     <div>
-      <!-- TODO: determine the difference between v-bind and data and check which is better for this  -->
       <LandingHero :data="landingHeroData" />
       <LandingServices :data="landingServicesData" />
       <LandingTrusted v-bind="landingTrustedData" />
@@ -32,10 +31,8 @@ import {
 } from "../../composables/ProductList/useProductList";
 import { formatProductList } from "../../helpers/productListHelper";
 
-const { data: landingPageData, pending: landingPagePending, error: landingPageError } =
-  useLandingPage();
-const { data: productListData, pending: productListPending, error: productListError } =
-  useProductList();
+const { data: landingPageData } = useLandingPage();
+const { data: productListData } = useProductList();
 
 /* Load landing hero */
 const landingHeroData = computed(() => ({

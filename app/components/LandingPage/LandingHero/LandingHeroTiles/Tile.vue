@@ -1,6 +1,5 @@
 <template>
     <div>
-
         
         <div class="p-3 border-slate-300 border bg-white border rounded-lg  ">
             <NuxtImg src="https://picsum.photos/250"/>

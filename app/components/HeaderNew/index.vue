@@ -24,11 +24,12 @@
 
             <!-- Center nav -->
             <UNavigationMenu :items="centerItems" class="min-w-[400px] flex items-center justify-end" />
- 
+
             <!-- Right buttons -->
             <template #right>
                 <div class="hidden lg:block" v-for="button in rightSideButtons">
-                    <UButton size="lg" :to="button.to ?? button.url" :label="button.label" :icon="button.icon" variant="subtle" />
+                    <UButton size="lg" :to="button.to ?? button.url" :label="button.label" :icon="button.icon"
+                        variant="subtle" />
                 </div>
                 <HeaderNewCartIcon />
             </template>
@@ -64,7 +65,7 @@ export interface SourceLink {
 }
 
 import type { Product } from '~/composables/Product/useProduct';
-const { data: headerData } = await useHeader();
+const { data: headerData } = useHeader();
 const { data: productData } = useProductList();
 const { data: noStoreProductData } = useNoStoreProductList();
 

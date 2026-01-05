@@ -1,7 +1,7 @@
 <template>
   <div class="group relative h-full w-full">
     <div class="h-full overflow-hidden rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col"
-         style="background: linear-gradient(135deg, #6b1f3a 0%, #8b2f4a 50%, #6b1f3a 100%)">
+         style="background: linear-gradient(135deg, #152845 0%, #2f4d7a 50%, #152845 100%)">
       
       <!-- CSS Visual Container (replaces image) -->
       <div class="relative h-48 overflow-hidden">
@@ -12,7 +12,7 @@
         <!-- Book visual -->
         <div class="absolute inset-0 flex items-center justify-center">
           <div class="relative w-32 h-40 md:w-36 md:h-44 transform rotate-3 group-hover:rotate-0 transition-transform duration-500"
-               style="background: linear-gradient(145deg, #7b2f4a 0%, #5b1f3a 100%); border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.3)">
+               style="background: linear-gradient(145deg, #1e3a8a 0%, #0f172a 100%); border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.3)">
             <!-- Book spine -->
             <div class="absolute left-0 top-0 bottom-0 w-4 bg-black/20"></div>
             

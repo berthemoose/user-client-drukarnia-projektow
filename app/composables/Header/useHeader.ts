@@ -21,44 +21,12 @@ export interface Header extends PayloadBase {
   }>;
 }
 
-// Cache for header data (shared across all component instances)
-let cachedHeaderData: Ref<Header | null> | null = null;
-let cachedHeaderError: Ref<Error | null> | null = null;
-let fetchPromise: Promise<void> | null = null;
-
-export const useHeader = async (): Promise<{
-  data: Ref<Header | null>;
-  error: Ref<Error | null>;
-}> => {
-  // If we already have cached data, return it immediately
-  if (cachedHeaderData !== null && cachedHeaderError !== null) {
-    return { data: cachedHeaderData, error: cachedHeaderError };
-  }
-
-  // If a fetch is already in progress, wait for it
-  if (fetchPromise !== null) {
-    await fetchPromise;
-    return { data: cachedHeaderData!, error: cachedHeaderError! };
-  }
-
-  // Initialize cache refs
-  cachedHeaderData = ref<Header | null>(null);
-  cachedHeaderError = ref<Error | null>(null);
-
+export const useHeader = () => {
   const { cmsUrl } = useApi();
 
-  // Create the fetch promise
-  fetchPromise = (async () => {
-    try {
-      const response = await $fetch<Header>(`${cmsUrl}/globals/header`);
-      cachedHeaderData!.value = response;
-    } catch (err) {
-      cachedHeaderError!.value = err as Error;
-    } finally {
-      fetchPromise = null;
-    }
-  })();
-
-  await fetchPromise;
-  return { data: cachedHeaderData, error: cachedHeaderError };
+  return useAsyncData<Header>(
+    'header-global-data',
+    () => $fetch<Header>(`${cmsUrl}/globals/header`)
+  );
 };
+

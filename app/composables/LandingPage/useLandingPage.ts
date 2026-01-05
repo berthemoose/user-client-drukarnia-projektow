@@ -1,8 +1,8 @@
-import type { Badge } from "~/app/types/badge";
-import type { Image } from "~/app/types/image";
-import type { Link } from "~/app/types/link";
-import type { Links } from "~/app/types/links";
-import type { PayloadBase } from "~/app/types/payload";
+import type { Badge } from "../../types/badge";
+import type { Image } from "../../types/image";
+import type { Link } from "../../types/link";
+import type { Links } from "../../types/links";
+import type { PayloadBase } from "../../types/payload";
 
 export interface LandingPageData extends PayloadBase {
   landingHero: string;
@@ -26,7 +26,7 @@ export interface LandingPageData extends PayloadBase {
   opinionsTexts: Array<LandingTitleStandard>;
   servicesText: Array<LandingTitleStandard>;
   zaufaliNamText: Array<LandingTitleStandard>;
-  
+
   servicesLinks: Links;
   conversionLinks: Links;
 
@@ -72,7 +72,7 @@ export interface ThesisTexts extends LandingTitleStandard {
       rightBottomSpecText: string;
       rightBottomSpecIcon: string;
     },
-    id? : string;
+    id?: string;
   }
 }
 
@@ -87,38 +87,32 @@ export interface LandingTitleStandard {
 }
 
 export const useLandingPage = () => {
+  
   const { cmsUrl } = useApi();
-  const nuxtApp = useNuxtApp();
+  const landingPageData = useState<LandingPageData | null>('landing-page-persistent-state', () => null);
 
-  // Use useFetch directly with caching and lazy loading
-  const { data, pending, error, refresh } = useFetch<LandingPageData>(
+  const {data: fetchedData, pending, error, refresh} = useFetch<LandingPageData>(
     `${cmsUrl}/globals/landing-page`,
     {
-      key: 'landing-page-data', // Unique cache key
-      lazy: true, // Don't block navigation
-      server: true, // Enable SSR
-      // Cache data for 5 minutes (300000ms)
-      getCachedData(key) {
-        const data = nuxtApp.payload.data[key] || nuxtApp.static.data[key];
-        // Return cached data if it exists and is less than 5 minutes old
-        if (data && Date.now() - (data as any)._fetchedAt < 300000) {
-          return data;
-        }
-      },
-      // Add timestamp for cache validation
-      transform: (data) => {
-        return {
-          ...data,
-          _fetchedAt: Date.now(),
-        };
-      },
+      key: 'landing-page-data',
     }
   );
 
+  if (fetchedData.value) {
+    landingPageData.value = fetchedData.value;
+  }
+
+  watch(fetchedData, (newVal) => {
+    if (newVal) {
+      landingPageData.value = newVal;
+    }
+  });
+  
   return {
-    data,
+    data: landingPageData,
     pending,
     error,
     refresh,
   };
 };
+

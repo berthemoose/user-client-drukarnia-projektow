@@ -78,7 +78,7 @@ import type { FooterColumn, FooterColumnLink } from '@nuxt/ui';
 
 const { data: productData } = useProductList();
 const { data: noStoreProductData } = useNoStoreProductList();
-const { data: headerData } = await useHeader();
+const { data: headerData } = useHeader();
 
 
 

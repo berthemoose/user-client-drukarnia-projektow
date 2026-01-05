@@ -1,23 +1,8 @@
 <template>
-  <section class="relative py-20 lg:py-24 overflow-hidden">
+  <section class="relative overflow-hidden">
     <div class="container mx-auto px-6 lg:px-8 relative z-10">
       <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <!-- Badge -->
-        <LabelBadge :data="badge" />
-
-        <h3
-          class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight"
-        >
-          {{ header }}
-        </h3>
-        <p class="text-gray-600 leading-relaxed">
-          {{ paragraph }}
-        </p>
-      </div>
-
-      <!-- Logo Marquee with enhanced styling -->
-      <div class="relative py-12">
+      <div class="relative">
         <!-- Marquee container with subtle shadow -->
 
         <NuxtMarquee
@@ -33,14 +18,29 @@
           <NuxtImg
             v-for="logo in logos"
             :src="logo.logo.url"
-            width="160px"
-            class="md:mx-[5px] mx-[2px]"
+            width="220px"
+            class="md:mx-[10px] mx-[5px]"
           />
         </NuxtMarquee>
       </div>
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <!-- Badge -->
+        <LabelBadge :data="badge" />
+
+        <h3
+          class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight"
+        >
+          {{ header }}
+        </h3>
+        <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+          {{ paragraph }}
+        </p>
+      </div>
+
+      <!-- Logo Marquee with enhanced styling -->
       <div
         v-if="links && links.length > 0"
-        class="flex items-center justify-center gap-4"
+        class="flex items-center justify-center"
       >
         <SimpleButton v-for="link in links" :key="link.id" :data="link.link" />
       </div>

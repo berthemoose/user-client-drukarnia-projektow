@@ -55,30 +55,15 @@ export const useAboutPage = () => {
   const { cmsUrl } = useApi();
   const nuxtApp = useNuxtApp();
 
-  // Use useFetch directly with caching and lazy loading
+  // Use useFetch directly
   const { data, pending, error, refresh } = useFetch<AboutPageData>(
     `${cmsUrl}/globals/aboutPage?depth=1`,
     {
       key: 'about-page-data', // Unique cache key
-      lazy: true, // Don't block navigation
       server: true, // Enable SSR
-      // Cache data for 5 minutes (300000ms)
-      getCachedData(key) {
-        const data = nuxtApp.payload.data[key] || nuxtApp.static.data[key];
-        // Return cached data if it exists and is less than 5 minutes old
-        if (data && Date.now() - (data as any)._fetchedAt < 300000) {
-          return data;
-        }
-      },
-      // Add timestamp for cache validation
-      transform: (data) => {
-        return {
-          ...data,
-          _fetchedAt: Date.now(),
-        };
-      },
     }
   );
+
 
   // Transform timeline items to match the TimelineComponent's expected format
   const transformedTimelineItems = computed(() => {
