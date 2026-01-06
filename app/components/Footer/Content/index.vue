@@ -27,7 +27,7 @@
               </div>
             </div>
             <div v-if="address" class="mt-6 md:mt-4">
-              <UButton class="text-xl md:text-2xl" :to="`mailto:${address}`" variant="outline" color="neutral">
+              <UButton class="text-xl md:text-2xl" :to="`mailto:${address}`" variant="link" color="neutral">
                 <UIcon name="system-uicons:paper-plane" class="text-4xl mr-[2px]" />
                 {{ address }}
               </UButton>
