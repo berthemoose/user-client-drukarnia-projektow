@@ -195,11 +195,9 @@
 // ============================================
 import { useCartStore, type CartItem } from "../../stores/cart";
 import { useOrderResponseStore } from "../../stores/orderResponse";
-import ProductPageFormFileInput from "~/components/ProductPage/Form/FileInput/index.vue";
 import { useForm } from "vee-validate";
 import * as yup from "yup";
 import { computed } from "vue";
-import { progress } from "#build/ui";
 
 // ============================================
 // TYPE DEFINITIONS
@@ -263,13 +261,14 @@ const stepperItems = ref([{
   icon: 'i-lucide-house'
 },
 {
-  title: 'Shipping',
-  description: 'Set your preferred shipping method',
+  title: 'Dane zamówienia',
+  description: 'Wypełnij formularz',
   icon: 'i-lucide-truck'
 },
 {
-  title: 'Checkout',
-  description: 'Confirm your order'
+  title: 'Płatność',
+  description: 'Spersonalizuj metodę płatności',
+  icon: 'i-lucide-credit-card'
 }]);
 const currentStepperStep = ref<number>(0);
 

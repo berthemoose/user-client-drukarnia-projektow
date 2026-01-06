@@ -26,10 +26,10 @@
 
         <!-- Button -->
         <UButton
-          variant="solid"
-          color="black"
+          variant="subtle"
+          color="primary"
           :to="getProductLink(props.cardData)"
-          class="w-full justify-between group-hover:bg-gray-900 group-hover:text-white transition-colors duration-300"
+          class="w-full justify-between duration-300"
         >
           <span>Zamów teraz</span>
           <UIcon
@@ -51,7 +51,6 @@ interface Props {
 
 const props = defineProps<Props>();
 type Params = typeof props.cardData;
-type ProductInfo = typeof props.cardData.productInfo
 
 const getProductLink = (card: Params): string => {
   const hasPrice = Object.keys(card.productInfo).includes('basePrice');

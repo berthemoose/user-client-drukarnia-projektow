@@ -51,10 +51,10 @@
         
         <!-- Button -->
         <UButton 
-          variant="solid"
+          variant="subtle"
           to="/products/thesis"
-          color="black"
-          class="w-full justify-between group-hover:bg-gray-900 group-hover:text-white transition-colors duration-300"
+          color="primary"
+          class="w-full justify-between duration-300"
         >
           <span>Zamów teraz</span>
           <UIcon 

@@ -8,10 +8,13 @@ export default defineNuxtConfig({
   },
   appConfig: {
     ui: {
+      theme: {
+        colors: ['brand', 'neutral']
+      },
       colors: {
-        primary: 'slate',
+        primary: 'brand',
         neutral: 'neutral'
-      }
+      },
     }
   },
   runtimeConfig: {
