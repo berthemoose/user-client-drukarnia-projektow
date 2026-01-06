@@ -7,7 +7,7 @@
 
     <!-- Number of pages -->
     <ProductPageFormTextInputsDynamicInput :label="''" :desc="''" :placeholder="'Liczba stron'" :field="pages"
-      :field-attrs="pagesAttrs" :are-inputs-disabled="areInputsDisabledRef" :input-type="'number'" />
+      :field-attrs="pagesAttrs" :are-inputs-disabled="areInputsDisabledRef" :input-type="'number'" :error="err.pages" />
   </div>
 
   <!-- Copies -->
@@ -18,14 +18,16 @@
 
     <!-- Number of copies -->
     <ProductPageFormTextInputsDynamicInput :label="''" :desc="''" :placeholder="'Liczba Kopii'" :field="copies"
-      :field-attrs="copiesAttrs" :are-inputs-disabled="areInputsDisabledRef" :input-type="'number'" />
+      :field-attrs="copiesAttrs" :are-inputs-disabled="areInputsDisabledRef" :input-type="'number'"
+      :error="err.copies" />
   </div>
 
   <!-- Comments -->
   <div class="mt-6">
     <p class="font-semibold text-gray-900 dark:text-gray-100">Komentarze</p>
     <ProductPageFormTextInputsDynamicInput :label="''" :desc="''" :placeholder="'Komentarze'" :field="comments"
-      :field-attrs="commentsAttrs" :are-inputs-disabled="areInputsDisabledRef" :input-type="'textarea'" />
+      :field-attrs="commentsAttrs" :are-inputs-disabled="areInputsDisabledRef" :input-type="'textarea'"
+      :error="err.comments" />
   </div>
 
 

@@ -56,10 +56,6 @@ export const useProduct = (prodId: string, formType: "form" | "store") => {
     const { data, pending, error, refresh } = useFetch<Product>(productUrl, {
       key: `product-${prodId}`,
       server: true,
-      getCachedData() {
-        /* Bypass cache */
-        return undefined;
-      },
     });
     return {
       data,
@@ -74,9 +70,6 @@ export const useProduct = (prodId: string, formType: "form" | "store") => {
       const { data, pending, error, refresh } = useFetch<Product>(productUrl, {
         key: `product-${prodId}`,
         server: true,
-        getCachedData() {
-          return undefined;
-        },
       });
       return {
         data,
@@ -89,9 +82,6 @@ export const useProduct = (prodId: string, formType: "form" | "store") => {
       const { data, pending, error, refresh } = useFetch<Product>(productUrl, {
         key: `product-${prodId}`,
         server: true,
-        getCachedData() {
-          return undefined;
-        },
       });
       return {
         data,

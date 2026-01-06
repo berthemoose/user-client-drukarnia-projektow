@@ -1,46 +1,27 @@
 <template>
-  <ProductPageFormStatusModal 
-    @trigger-close-modal="closeModal()" 
-    :is-modal-open="isModalOpen" 
-    :modal-msg="modalMessage"
-    :modal-title="modalTitle" 
-    :modal-state="modalState" 
-  />
+  <ProductPageFormStatusModal @trigger-close-modal="closeModal()" :is-modal-open="isModalOpen" :modal-msg="modalMessage"
+    :modal-title="modalTitle" :modal-state="modalState" />
 
   <div class="grid grid-cols-1 md:grid-cols-8 gap-6">
-    
-    
+
+
     <div class="md:col-span-3 w-full">
-      <ProductPageProductCardDescription 
-        :url="props.imageUrl" 
-        :alt="props.imageAlt" 
-        :name="props.productName"
-        :desc="props.desc" 
-        :text-color="props.textColor" 
-        :color-scheme="props.colorScheme" 
-      />
+      <ProductPageProductCardDescription :url="props.imageUrl" :alt="props.imageAlt" :name="props.productName"
+        :desc="props.desc" :text-color="props.textColor" :color-scheme="props.colorScheme" />
     </div>
 
     <div class="md:col-span-3 w-full px-0 md:px-6" :style="textColorAll">
       <div class="w-full flex items-start justify-start mb-4">
         <h3 class="text-xl font-bold">Parametry zamówienia</h3>
       </div>
-      
+
       <div class="gap-4 flex flex-col w-full">
-        <ProductPageFormSpecsInputs 
-          :errors="errors" 
-          :specs="specs" 
-          :specFields="specFields"
-          :are-inputs-disabled="areInputsDisabled" 
-        />
+        <ProductPageFormSpecsInputs :errors="errors" :specs="specs" :specFields="specFields"
+          :are-inputs-disabled="areInputsDisabled" />
       </div>
 
       <div class="flex flex-col w-full gap-2 mt-8">
-        <ProductPageFormTextInputs 
-          :errors="errors" 
-          :are-inputs-disabled="areInputsDisabled" 
-          :fields="staticFields" 
-        />
+        <ProductPageFormTextInputs :errors="errors" :are-inputs-disabled="areInputsDisabled" :fields="staticFields" />
       </div>
     </div>
 
@@ -48,13 +29,8 @@
       <div class="w-full flex items-start justify-start mb-4">
         <h3 class="text-xl font-bold">Podsumowanie</h3>
       </div>
-        <ProductPageFormPriceSection 
-          :is-enabled="basePrice ? true : false" 
-          :price="calculatedPrice"
-          :is-loading="isButtonLoading" 
-          :is-active="isSubmitButtonActive" 
-          @trigger-submit="handleSubmit()" 
-        />
+      <ProductPageFormPriceSection :is-enabled="basePrice ? true : false" :price="calculatedPrice"
+        :is-loading="isButtonLoading" :is-active="isSubmitButtonActive" @trigger-submit="handleSubmit()" />
     </div>
   </div>
 </template>
@@ -113,7 +89,7 @@ const hasFormData = computed(() => {
 const handleBeforeUnload = (e: BeforeUnloadEvent) => {
   if (hasFormData.value) {
     e.preventDefault();
-    e.returnValue = ""; 
+    e.returnValue = "";
     return "";
   }
 };

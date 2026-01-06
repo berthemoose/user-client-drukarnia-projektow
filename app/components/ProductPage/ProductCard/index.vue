@@ -4,8 +4,7 @@
       <!-- Content -->
       <div class="relative z-10 p-8">
         <div class="flex flex-col justify-center">
-          <div class=""
-            :style="props.cardData.isStudent ? 'bg-black-10' : 'bg-white'">
+          <div class="" :style="props.cardData.isStudent ? 'bg-black-10' : 'bg-white'">
             <!-- Form Section -->
             <div>
               <ProductPageForm :product-name="props.cardData.name" :product-id="props.cardData.productId"
@@ -18,7 +17,7 @@
           </div>
         </div>
       </div>
-      <!-- Bottom info bar --> 
+      <!-- Bottom info bar -->
       <ProductPageProductCardBottomBar />
     </div>
   </div>

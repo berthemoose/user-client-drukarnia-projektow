@@ -23,7 +23,7 @@ const DEFAULT_CONFIG = {
 // Initialize DOMPurify once
 const initDOMPurify = async () => {
   if (!process.client) return null;
-  
+
   try {
     const dompurify = await import('dompurify');
     return dompurify.default;
@@ -66,7 +66,7 @@ export const useRichText = (config = {}) => {
   const sanitize = (dirtyHtml: string): string => {
     if (!dirtyHtml || typeof dirtyHtml !== 'string') return '';
     if (!isReady.value || !DOMPurify) return dirtyHtml; // Return as is if not ready
-    
+
     try {
       const sanitized = DOMPurify.sanitize(dirtyHtml, {
         ...DEFAULT_CONFIG,
@@ -80,7 +80,7 @@ export const useRichText = (config = {}) => {
         SANITIZE_DOM: false,
         KEEP_CONTENT: true
       });
-      
+
       return sanitized || '';
     } catch (err) {
       console.error('Error sanitizing HTML:', err, dirtyHtml);

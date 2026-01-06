@@ -2,7 +2,7 @@
   <div class="bg-black text-white flex flex-col items-center text-center pb-4 md:pb-2">
     <!-- Main -->
 
-    {{ footerItems }}
+    
 
     <UContainer>
       <div class="grid md:grid-cols-8 w-full">

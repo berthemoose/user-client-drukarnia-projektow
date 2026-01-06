@@ -1,8 +1,6 @@
 <template>
     <div class="">
-        <NuxtLink to="/">
-            <LazyNuxtImg :src="props.url" :alt="props.alt" class="w-[90px]" width="1102" height="577" />
-        </NuxtLink>
+        <LazyNuxtImg :src="props.url" :alt="props.alt" class="w-[90px]" width="1102" height="577" />
     </div>
 </template>
 
