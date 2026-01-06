@@ -1,7 +1,7 @@
 <template>
   <main>
     <div>
-      
+      <div class="bg-brand-500"></div> <!-- This only exists here to "kickstart" the theme (???) -->
       <LandingHero :data="landingHeroData" />
       <LandingServices :data="landingServicesData" />
       <LandingTrusted v-bind="landingTrustedData" />
