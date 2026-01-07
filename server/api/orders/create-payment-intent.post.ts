@@ -19,18 +19,15 @@ export default defineEventHandler(async (event) => {
 
   try {
     const config = useRuntimeConfig(event);
-    const PAYMENT_INTENT_API_SECRET = config.paymentIntentApiSecret;
-  
-    const { orderUrl } = useOrderApi();
-  
-  
+  /* TEMPORARILY EXPOSED!!! FIX!!! JUST FOR DEBUGGING!!! */
+    const PAYMENT_INTENT_API_SECRET = "}UIVinWwS=;x~6XIb=BD8Q20/}@%8ilB*E8b&k}N-q~xderV/Oq0Y?;066;R~ST"
+    const { orderUrl } = useOrderApi(); 
     const body = await readBody<Items>(event);
     const result = await createPaymentIntent(
       body,
       orderUrl,
       PAYMENT_INTENT_API_SECRET
     );
-  
     return result;
     
   } catch (error) {
