@@ -23,12 +23,6 @@ export default defineEventHandler(async (event) => {
   
     const { orderUrl } = useOrderApi();
   
-    if (!PAYMENT_INTENT_API_SECRET) {
-      throw createError({
-        statusCode: 500,
-        message: "Payment API secret not configured",
-      });
-    }
   
     const body = await readBody<Items>(event);
     const result = await createPaymentIntent(
