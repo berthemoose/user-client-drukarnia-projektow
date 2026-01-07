@@ -1,3 +1,5 @@
+import { useOrderApi } from "~~/server/composables/useOrderApi";
+
 interface OrderItem {
   id: string;
   cartItemId: string;
@@ -38,7 +40,8 @@ interface OrderData {
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event);
   const ORDER_API_SECRET = config.orderApiSecret;
-  const ORDER_URL = config.orderUrl;
+  const {orderUrl} = useOrderApi();
+  const ORDER_URL = orderUrl;
   const CLIENT_URL = config.clientUrl;
 
   if (!ORDER_API_SECRET) {

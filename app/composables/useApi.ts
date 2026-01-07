@@ -10,7 +10,7 @@ export const useApi = (): UseApiReturn => {
   const cmsUrl = `https://app-cms-drukarnia-projektow-staging.azurewebsites.net/api`;
 
   /* Order service URL */
-  const orderUrl = `https://app-user-client-drukarnia-projektow-staging.azurewebsites.net`;
+  const orderUrl = `https://app-backend-services-drukarnia-projektow-staging.azurewebsites.net`;
 
   return {
     cmsUrl,
