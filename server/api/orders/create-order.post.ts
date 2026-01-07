@@ -39,10 +39,11 @@ interface OrderData {
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event);
-  const ORDER_API_SECRET = config.orderApiSecret;
+  /* TEMPORARILY EXPOSED!!! FIX!!! JUST FOR DEBUGGING!!! */
+  const ORDER_API_SECRET = '#QES>9PZ"Kkbx2OP|e)??cO{}hTx1:[#j9<[8%R_)`yK3rUoF,U#-kx~j:&v{tE';
   const {orderUrl} = useOrderApi();
   const ORDER_URL = orderUrl;
-  const CLIENT_URL = config.clientUrl;
+  const CLIENT_URL = 'https://app-user-client-drukarnia-projektow-staging.azurewebsites.net';
 
   if (!ORDER_API_SECRET) {
     throw createError({
