@@ -21,12 +21,21 @@ declare module 'vue' {
   }
 }
 
+// 
+// FIX FIX FIX FIX !!!!!!!!!!!!!!!!!!!!!
+// SECURITY WARNING: siteKey is exposed here!
+// JUST FOR DEBUGGING!!!
+// 
+
 import type { RuntimeConfig } from "~/app/types/api"
 
 export default defineNuxtPlugin(() => {
   // Get runtime config inside plugin context
   const config = useRuntimeConfig() as RuntimeConfig;
-  const siteKey = config.public.siteKey;
+  
+  
+  /* TEMPORARILY EXPOSED!!! FIX!!! JUST FOR DEBUGGING!!! */
+  const siteKey = "6LfN9NorAAAAACgvk4xQTBRWhb8JH7kuuPeTiG8a";
 
   const script = document.createElement('script');
   script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
