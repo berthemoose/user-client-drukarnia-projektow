@@ -1,49 +1,62 @@
-// server/api/orders/create-payment-intent.post.ts
+interface ItemData {
+  id: string;
+  productName: string;
+  price: number;
+  basePrice: number;
+  values: {
+    [key: string]: string;
+  };
+}
+interface Items {
+  items: Array<ItemData>;
+  total: number;
+  deliveryMethod: string;
+}
 
-// 1. Remove the import of the frontend composable
-// import { useOrderApi } from "../../composables/useOrderApi"; 
+import { useOrderApi } from "../../composables/useOrderApi";
 
 export default defineEventHandler(async (event) => {
+
   try {
     const config = useRuntimeConfig(event);
-    
-    // 2. Retrieve config directly here instead of using the composable
-    // Ensure these keys match your runtimeConfig in nuxt.config.ts
-    const PAYMENT_INTENT_API_SECRET = config.paymentIntentApiSecret || process.env.PAYMENT_INTENT_API_SECRET;
-    
-    // CAUTION: Ensure 'orderUrl' is actually in your runtimeConfig.
-    // If it was only inside the composable, you need to add it to nuxt.config.ts
-    const orderUrl = config.orderUrl || config.public?.orderUrl || process.env.ORDER_URL;
-
-    // Debugging check (will show in your trap-and-reveal if it fails)
-    if (!orderUrl) throw new Error("Order URL is missing in Server Config");
-    if (!PAYMENT_INTENT_API_SECRET) throw new Error("Payment Secret is missing");
-
+    const PAYMENT_INTENT_API_SECRET = config.paymentIntentApiSecret;
+  
+    const { orderUrl } = useOrderApi();
+  
+    if (!PAYMENT_INTENT_API_SECRET) {
+      throw createError({
+        statusCode: 500,
+        message: "Payment API secret not configured",
+      });
+    }
+  
     const body = await readBody<Items>(event);
-
-    // 3. Call the helper function (refactored below)
     const result = await createPaymentIntent(
       body,
       orderUrl,
       PAYMENT_INTENT_API_SECRET
     );
-
+  
     return result;
-
-  } catch (error: any) {
-    // This is your "Trap and Reveal" that sends the error to the browser
-    console.error(`CRITICAL ERROR:`, error);
+    
+  } catch (error) {
+    console.error(`CRITICAL ERROR: ${error}`);
     return {
-      statusCode: 500,
-      status: 'error',
-      message: error.message, // This will explicitly tell you "useRuntimeConfig is not defined" if that was the issue
+      status:'error',
+      statusCode:500,
+      message: error.message,
       stack: error.stack,
+      error: error,
       debug: {
-        hasUrl: !!(useRuntimeConfig(event).orderUrl || process.env.ORDER_URL),
-        env: process.env.NODE_ENV
+        // Let's verify if your "hardcoded" values are actually working
+        hasSecret: !!process.env.PAYMENT_INTENT_API_SECRET, 
+        nodeEnv: process.env.NODE_ENV
       }
     };
   }
+
+
+
 });
 
 const createPaymentIntent = async (
@@ -51,24 +64,34 @@ const createPaymentIntent = async (
   url: string,
   secret: string
 ) => {
-  // 4. Use $fetch instead of fetch
   try {
-    // Note: $fetch throws automatically on 4xx/5xx errors, so we don't need "if (!response.ok)"
-    const result = await $fetch(`${url}/create-payment-intent/`, {
+    const response = await fetch(`${url}/create-payment-intent/`, {
       method: "POST",
-      body: {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
         ...data,
         secret: secret,
-      }
+      }),
     });
 
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Python API error (${response.status}): ${errorText}`);
+      throw createError({
+        statusCode: response.status,
+        message: `Payment service error: ${errorText}`,
+      });
+    }
+
+    const result = await response.json();
+    console.log(
+      `Payment intent created successfully: ${JSON.stringify(result)}`
+    );
     return result;
-  } catch (error: any) {
-    console.error(`Backend API error: ${error}`);
-    // $fetch errors contain useful details in error.data
-    throw createError({
-      statusCode: error.response?.status || 500,
-      message: `Payment service failed: ${JSON.stringify(error.data || error.message)}`,
-    });
+  } catch (error) {
+    console.error(`Error creating payment intent: ${error}`);
+    throw error;
   }
 };
