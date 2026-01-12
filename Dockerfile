@@ -10,7 +10,6 @@ COPY .yarn ./.yarn
 RUN yarn install --immutable
 
 COPY . .
-
 RUN yarn build
 
 FROM node:22-bookworm-slim

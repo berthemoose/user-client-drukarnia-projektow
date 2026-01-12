@@ -76,7 +76,7 @@ const centerLinks = computed(() => {
     const links = headerData.value?.headerLinks ?? [];
     return links.map((item: SourceLink) => ({
         label: item.link.label,
-        to: item.link.reference,
+        to: `/${item.link.reference}`,
         active: route.path.startsWith(`/${item.link.reference}`)
     }))
 });
