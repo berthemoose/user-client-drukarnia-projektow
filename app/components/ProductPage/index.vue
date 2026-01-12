@@ -5,14 +5,14 @@
   </div>
 
   <!-- Ready state -->
-  <div v-else class="mx-12 flex flex-col items-center justify-center py-8 lg:py-12 relative">
+  <div v-else class="mx-1 lg:mx-12 flex flex-col items-center justify-center py-8 lg:py-12 relative">
     <!-- Breadcrumb container -->
 
     <!-- Top level product container -->
     <div class="relative z-10 md:px-6">
       <!-- Main Product Card -->
 
-      <UContainer>
+
         <div class="flex w-full items-left my-2  ">
           <ProductPageBreadcrumb :product-name="dataFormatted.name" />
         </div>
@@ -32,7 +32,7 @@
             formType: dataFormatted?.formType,
           }" />
         </div>
-      </UContainer>
+
 
     </div>
   </div>

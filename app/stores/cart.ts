@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { markRaw } from "vue";
 import type { FormValues } from "~/components/ProductPage/Form/index.vue";
 
 export interface CartItem extends OrderInCart {
@@ -197,7 +198,7 @@ export const useCartStore = defineStore("cart", {
     updateFile(cartItemId: string, file: File | null) {
       const item = this.items.find((item) => item.cartItemId === cartItemId);
       if (item) {
-        item.file = file;
+        item.file = file ? markRaw(file) : null;
         saveCartToStorage(this.items);
       }
     },

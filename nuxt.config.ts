@@ -4,7 +4,8 @@ export default defineNuxtConfig({
   css: ['~/assets/css/global.css'],
   modules: ['nuxt-marquee', '@pinia/nuxt', '@nuxt/ui', '@nuxt/image'],
   colorMode: {
-    preference: 'light'
+    preference: 'light',
+    fallback: 'light', 
   },
   appConfig: {
     ui: {

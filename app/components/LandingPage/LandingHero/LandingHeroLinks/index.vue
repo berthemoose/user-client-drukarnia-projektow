@@ -9,7 +9,7 @@ const props = defineProps<LinksProp>();
 </script>
 
 <template>
-  <div v-if="props.links?.length" class="flex gap-6 items-center">
+  <div v-if="props.links?.length" class="flex flex-col sm:flex-row gap-2 sm:gap-6 items-center">
     <UButton 
       v-for="(link, index) in props.links" 
       :key="link.id || index" 

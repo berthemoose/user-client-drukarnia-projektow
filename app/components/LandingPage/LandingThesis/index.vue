@@ -25,7 +25,7 @@
               <UIcon v-if="props.data?.badge.icon" :name="props.data?.badge.icon" class="text-xl" />
               <span class="uppercase tracking-wider">{{
                 props.data?.badge.text
-                }}</span>
+              }}</span>
             </div>
 
             <!-- Main Heading -->
@@ -51,27 +51,23 @@
                 </div>
                 <span class="text-white/95 text-base md:text-lg">{{
                   feature.specPoint
-                  }}</span>
+                }}</span>
               </div>
             </div>
 
             <!-- CTA Buttons -->
             <div class="flex flex-col sm:flex-row gap-4">
-              <button v-if="props.data.links[0]"
+              <NuxtLink v-if="props.data.links[0]" :to="props.data.links[0].link.reference"
                 class="group relative px-8 py-4 bg-amber-400 hover:bg-amber-300 text-burgundy-900 font-bold text-lg rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center justify-center">
-                <NuxtLink :to="props.data.links[0].link.reference">
-                  {{ props.data.links[0].link.label }}
-                </NuxtLink>
+                {{ props.data.links[0].link.label }}
                 <UIcon name="heroicons:arrow-right"
                   class="ml-2 text-xl transition-transform group-hover:translate-x-1" />
-              </button>
+              </NuxtLink>
 
-              <button v-if="props.data.links[1]"
-                class="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold text-lg rounded-full border-2 border-white/40 transition-all duration-300 hover:border-white/60">
-                <NuxtLink :to="props.data.links[1].link.reference">
-                  {{ props.data.links[1].link.label }}
-                </NuxtLink>
-              </button>
+              <NuxtLink v-if="props.data.links[1]" :to="props.data.links[1].link.reference"
+                class="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold text-lg rounded-full border-2 border-white/40 transition-all duration-300 hover:border-white/60 flex items-center justify-center text-center">
+                {{ props.data.links[1].link.label }}
+              </NuxtLink>
             </div>
           </div>
 
@@ -133,13 +129,13 @@
                 <UIcon :name="props.data?.texts.bottomSpecs.leftBottomSpec.leftBottomSpecIcon"
                   class="text-xl text-amber-300" />
                 <span class="text-sm md:text-base">{{ props.data?.texts.bottomSpecs.leftBottomSpec.leftBottomSpecText
-                  }}</span>
+                }}</span>
               </div>
               <div class="flex items-center gap-2 text-white/90">
                 <UIcon :name="props.data?.texts.bottomSpecs.rightBottomSpec.rightBottomSpecIcon"
                   class="text-xl text-amber-300" />
                 <span class="text-sm md:text-base">{{ props.data?.texts.bottomSpecs.rightBottomSpec.rightBottomSpecText
-                  }}</span>
+                }}</span>
               </div>
             </div>
           </div>

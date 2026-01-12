@@ -2,6 +2,7 @@
   <div class="my-4">
     <UFileUpload
       v-model="fileModel"
+      accept="application/pdf, image/jpeg, image/jpg, image/svg+xml"
       icon="i-lucide-image"
       :disabled="areInputsDisabledRef"
       variant="area"
@@ -65,8 +66,9 @@ const { areInputsDisabled: areInputsDisabledRef } = toRefs(props);
 
 const fileModel = computed({
   get: () => props.file,
-  set: (value: File | null) => {
-    emit('update:file', value);
+  set: (value: any) => {
+    const file = Array.isArray(value) ? value[0] : value;
+    emit('update:file', file);
   }
 });
 </script>
