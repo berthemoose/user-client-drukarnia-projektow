@@ -1,17 +1,14 @@
 <template>
   <div class="group relative h-full w-full">
     <div
-      class="h-full overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col"
-    >
+      class="h-full overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 flex flex-col">
       <!-- Image Container with Hover Effect -->
-      <div class="relative h-48 overflow-hidden ">
+      <div class="relative h-48 overflow-hidden">
+        <NuxtImg :src="props.cardData.productInfo.productImage.url"
+          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 will-change-transform"
+          width="600" :alt="props.cardData.productInfo.productName" />
         <div
-          class="h-full w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-          :style="`background-image: url(${props.cardData.productInfo.productImage.url})`"
-        >
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-          ></div>
+          class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
         </div>
       </div>
 
@@ -25,17 +22,11 @@
         </p>
 
         <!-- Button -->
-        <UButton
-          variant="subtle"
-          color="primary"
-          :to="getProductLink(props.cardData)"
-          class="w-full justify-between duration-300"
-        >
+        <UButton variant="subtle" color="primary" :to="getProductLink(props.cardData)"
+          class="w-full justify-between duration-300">
           <span>Zamów teraz</span>
-          <UIcon
-            name="ic:round-arrow-forward"
-            class="text-lg transition-transform duration-300 group-hover:translate-x-1"
-          />
+          <UIcon name="ic:round-arrow-forward"
+            class="text-lg transition-transform duration-300 group-hover:translate-x-1" />
         </UButton>
       </div>
     </div>
