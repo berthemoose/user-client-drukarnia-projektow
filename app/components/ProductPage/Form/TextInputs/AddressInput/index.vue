@@ -13,6 +13,8 @@
             </p>
           </div>
 
+
+
           <USelect v-model="selectedDeliveryMethodId" :items="deliveryMethodOptions"
             :placeholder="'Kliknij aby wybrać metodę dostawy'"
             :disabled="areInputsDisabledRef || deliveryMethodsPending" :loading="deliveryMethodsPending" size="xl"
@@ -192,7 +194,7 @@ const deliveryMethodOptions = computed(() => {
   }
 
   return deliveryMethods.value.options.map((option) => ({
-    label: `${option.name} - ${option.price.toFixed(2)} PLN`,
+    label: `${option.description} - ${option.price.toFixed(2)} PLN`,
     value: option.id,
   }));
 });
