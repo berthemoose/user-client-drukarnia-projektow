@@ -17,11 +17,11 @@
 
       <div class="gap-4 flex flex-col w-full">
         <ProductPageFormSpecsInputs :errors="errors" :specs="specs" :specFields="specFields"
-          :are-inputs-disabled="areInputsDisabled" />
+          :are-inputs-disabled="areInputsDisabled" :text-color="props.textColor" />
       </div>
 
       <div class="flex flex-col w-full gap-2 mt-8">
-        <ProductPageFormTextInputs :errors="errors" :are-inputs-disabled="areInputsDisabled" :fields="staticFields" />
+        <ProductPageFormTextInputs :errors="errors" :are-inputs-disabled="areInputsDisabled" :fields="staticFields" :text-color="props.textColor" />
       </div>
     </div>
 

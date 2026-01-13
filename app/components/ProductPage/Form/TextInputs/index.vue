@@ -2,7 +2,7 @@
   <!-- Pages -->
   <div class="">
     <div class="mb-1">
-      <p class="font-semibold text-gray-900 dark:text-gray-100">Ilość stron</p>
+      <p class="font-semibold text-gray-900 dark:text-gray-100" :class="props.textColor === 'white' ? 'text-white' : 'text-black'">Ilość stron</p>
     </div>
 
     <!-- Number of pages -->
@@ -13,7 +13,7 @@
   <!-- Copies -->
   <div class="">
     <div class="mb-1">
-      <p class="font-semibold text-gray-900 dark:text-gray-100">Nakład</p>
+      <p class="font-semibold text-gray-900 dark:text-gray-100" :class="props.textColor === 'white' ? 'text-white' : 'text-black'">Nakład</p>
     </div>
 
     <!-- Number of copies -->
@@ -24,7 +24,7 @@
 
   <!-- Comments -->
   <div class="mt-6">
-    <p class="font-semibold text-gray-900 dark:text-gray-100">Komentarze</p>
+    <p class="font-semibold text-gray-900 dark:text-gray-100" :class="props.textColor === 'white' ? 'text-white' : 'text-black'">Komentarze</p>
     <ProductPageFormTextInputsDynamicInput :label="''" :desc="''" :placeholder="'Komentarze'" :field="comments"
       :field-attrs="commentsAttrs" :are-inputs-disabled="areInputsDisabledRef" :input-type="'textarea'"
       :error="err.comments" />
@@ -41,6 +41,7 @@ interface InputProps {
   areInputsDisabled: boolean;
   fields: Record<StaticFieldKey, DefineFieldReturn>;
   errors: Partial<Record<string, string | undefined>>;
+  textColor: "white" | "black" | null;
 }
 const props = defineProps<InputProps>();
 

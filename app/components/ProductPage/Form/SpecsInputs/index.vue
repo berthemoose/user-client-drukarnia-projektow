@@ -2,7 +2,7 @@
   <div v-for="spec in props.specs" :key="spec.id">
     <div class="w-full" v-if="fields[spec.specName]">
       <div class="mb-1">
-        <p class="font-semibold text-gray-900 dark:text-gray-100">{{ spec.specDisplayName }}</p>
+        <p class="font-semibold text-gray-900 dark:text-gray-100" :class="props.textColor === 'white' ? 'text-white' : 'text-black'">{{ spec.specDisplayName }}</p>
       </div>
       
       <USelect
@@ -33,6 +33,7 @@ interface SpecsProps {
   specFields: Record<string, SpecField>;
   errors: Partial<Record<string, string | undefined>>;
   areInputsDisabled: boolean;
+  textColor: "white" | "black" | null;
 }
 
 const props = defineProps<SpecsProps>();

@@ -9,6 +9,10 @@ export interface Product extends PayloadBase {
     productName: string;
     productShortDescription: string;
     productLongDescriptionHTML: string;
+    productBottomTexts: Array<{
+      text: string;
+      id: string;
+    }>;
     basePrice: number;
   };
   productSpecs: Array<ProductSpec>;

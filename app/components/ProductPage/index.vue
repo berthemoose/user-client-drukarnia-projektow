@@ -30,6 +30,7 @@
             colorScheme: props.colorScheme,
             prodTypeId: dataFormatted?.prodId,
             formType: dataFormatted?.formType,
+            bottomTexts: dataFormatted?.bottomTexts,
           }" />
         </div>
 
@@ -57,7 +58,6 @@ import type { ColorSchemeVariant } from "./ProductCard/getColorScheme";
 
 const props = defineProps<ProductProp>();
 const { data, pending } = useProduct(props.prodId, props.prodType);
-
 const typedData = data as Ref<ProductData>;
 
 /* Data for store variant  */
@@ -70,6 +70,7 @@ const dataFormatted = computed(() => {
       desc: prod?.productInfo.productShortDescription || "",
       longDesc: prod?.productInfo.productLongDescriptionHTML || "",
       specs: prod?.productSpecs || [],
+      bottomTexts: prod?.productInfo.productBottomTexts || [],
       basePrice: prod?.productInfo.basePrice || null,
       prodId: props.prodId || "thesis", //became prodTypeId to avoid confusion
       formType: props.prodType, // becomes formType to avoid confusion
@@ -82,6 +83,7 @@ const dataFormatted = computed(() => {
       desc: prod?.productInfo.productShortDescription || "",
       longDesc: prod?.productInfo.productLongDescriptionHTML || "",
       specs: prod?.productSpecs || [],
+      bottomTexts: prod?.productInfo.productBottomTexts || [],
       basePrice: prod?.productInfo.basePrice || null,
       prodId: null,
       formType: props.prodType,
