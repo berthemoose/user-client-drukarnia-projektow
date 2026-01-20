@@ -25,7 +25,6 @@
     </UFileUpload>
   </div>
 </template>
-<!-- TEST -->
 
 <script lang="ts" setup>
 interface FileInputProps {
