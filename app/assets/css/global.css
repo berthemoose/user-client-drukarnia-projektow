@@ -1,0 +1,77 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme {
+  --color-brand-50: #fef2f2;
+  --color-brand-100: #fee2e2;
+  --color-brand-200: #fecaca;
+  --color-brand-300: #fca5a5;
+  --color-brand-400: #f87171;
+  --color-brand-500: black;
+  --color-brand-600: black;
+  --color-brand-700: black;
+  --color-brand-800: black;
+  --color-brand-900: black;
+  --color-brand-950: black;
+}
+
+@font-face {
+  font-family: "Arial Regular";
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: local("Arial Regular"), url("./fonts/ARIAL.woff") format("woff");
+}
+
+* {
+  font-family: "Arial Regular", Arial, sans-serif;
+}
+
+.bg-grid-overlay {
+  background-image: linear-gradient(0deg,
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.bg-grid-overlay-white {
+  background-image: linear-gradient(0deg,
+      rgb(255, 255, 255, 0.2) 1px,
+      transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+
+
+.mobile-nav-enter-active,
+.mobile-nav-leave-active {
+  transition: 1s transform ease;
+}
+
+.mobile-nav-enter-from,
+.mobile-nav-leave-to {
+  transform: translateX(-100%);
+}
+
+.mobile-nav-enter-to {
+  transform: translateX(0);
+}
+
+.txt-anim {
+  transform: translateY(25px);
+  opacity: 0;
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+.txt-anim.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Hide reCAPTCHA badge - controlled by Vue composable */
+.grecaptcha-badge.hidden {
+  visibility: hidden !important;
+}
+
