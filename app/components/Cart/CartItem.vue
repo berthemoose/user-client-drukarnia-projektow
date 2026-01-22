@@ -6,8 +6,23 @@
       <div class="space-y-4">
         <!-- File Upload Section -->
         <div class="border-b pb-4">
-          <ProductPageFormFileInput :file="item.file || null"
-            @update:file="(file) => updateItemFile(item.cartItemId, file)" :are-inputs-disabled="false" />
+          <div class="flex flex-col gap-2">
+            <!-- TODO: Fix UFileUpload file reject error -->
+            <!-- 
+            <ProductPageFormFileInput :file="item.file || null"
+              @update:file="(file) => updateItemFile(item.cartItemId, file)" :are-inputs-disabled="false" /> 
+            -->
+            <label class="text-sm font-medium text-gray-700">Wybierz plik (PDF, JPG, PNG, WEBP)</label>
+            <input type="file" accept="application/pdf,image/jpeg,image/png,image/webp" class="block w-full text-sm text-gray-500
+                file:mr-4 file:py-2 file:px-4
+                file:rounded-full file:border-0
+                file:text-sm file:font-semibold
+                file:bg-primary-50 file:text-primary-700
+                hover:file:bg-primary-100" @change="(event) => handleFileChange(event, item.cartItemId)" />
+            <p v-if="item.file" class="text-xs text-green-600 mt-1">
+              Aktualny plik: {{ item.file.name }}
+            </p>
+          </div>
         </div>
 
         <!-- Product Information & Controls -->
@@ -114,6 +129,12 @@ const confirmRemoval = (id: string) => {
 
 const updateItemFile = (cartItemId: string, file: File | null) => {
   cartStore.updateFile(cartItemId, file);
+};
+
+const handleFileChange = (event: Event, cartItemId: string) => {
+  const target = event.target as HTMLInputElement;
+  const file = target.files?.[0] || null;
+  updateItemFile(cartItemId, file);
 };
 
 const removeItem = (cartItemId: string) => {
